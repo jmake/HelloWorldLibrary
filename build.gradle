@@ -1,59 +1,18 @@
-// Add necessary repositories and dependencies
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.0.0'
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'maven'
-
-android {
-    namespace 'com.hello.world'
-    compileSdkVersion 34
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 34
-    }
-}
-
-repositories {
-    mavenCentral()
-    google()
-}
-
-dependencies {
-    // Add your dependencies if you have any
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    archiveClassifier.set("sources")
-}
-
-task javadocJar(type: Jar) {
-    from javadoc.destinationDir
-    archiveClassifier.set("javadoc")
-}
-
-uploadArchives {
+allprojects {
     repositories {
-        mavenDeployer {
-            repository(url: uri("file://${project.buildDir}/repo"))
-            pom.groupId = 'com.github.jmake'
-            pom.artifactId = 'HelloWorldLibrary'
-            pom.version = 'v0.1'
-            pom.packaging = 'aar'
-
-            // Include the generated Javadoc and source JARs
-            artifact sourcesJar
-            artifact javadocJar
-        }
+        google()
+        mavenCentral()
     }
 }
+
 
