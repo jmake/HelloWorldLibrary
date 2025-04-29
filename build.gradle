@@ -1,3 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+/*
 plugins {
     id 'com.android.library'
 }
@@ -15,7 +34,7 @@ android {
 dependencies {
     // No dependencies
 }
-
+*/
 
 /*
 apply plugin: 'com.android.library'
