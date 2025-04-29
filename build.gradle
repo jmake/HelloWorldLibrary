@@ -24,7 +24,7 @@ android {
 publishing {
     publications {
         release(MavenPublication) {
-            from components["android"]  // Correct reference for the Android library component
+            from components["release"]  // Correct reference for the Android library component
             groupId = 'com.github.jmake'
             artifactId = 'HelloWorldLibrary'
             version = 'v0.1'
