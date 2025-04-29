@@ -1,3 +1,4 @@
+// Add necessary repositories and dependencies
 buildscript {
     repositories {
         google()
@@ -9,10 +10,10 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 android {
-    namespace 'com.example.helloworld'
+    namespace 'com.hello.world'
     compileSdkVersion 34
 
     defaultConfig {
@@ -21,17 +22,38 @@ android {
     }
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            from components["release"]  // Correct reference for the Android library component
-            groupId = 'com.github.jmake'
-            artifactId = 'HelloWorldLibrary'
-            version = 'v0.1'
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    // Add your dependencies if you have any
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set("sources")
+}
+
+task javadocJar(type: Jar) {
+    from javadoc.destinationDir
+    archiveClassifier.set("javadoc")
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri("file://${project.buildDir}/repo"))
+            pom.groupId = 'com.github.jmake'
+            pom.artifactId = 'HelloWorldLibrary'
+            pom.version = 'v0.1'
+            pom.packaging = 'aar'
+
+            // Include the generated Javadoc and source JARs
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 }
 
-dependencies {
-    // No dependencies
-}
