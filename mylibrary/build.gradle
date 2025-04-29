@@ -11,13 +11,19 @@ android {
         minSdk 21
         targetSdk 33
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
 }
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
+                from components["release"]
                 groupId = 'com.github.jmake'
                 artifactId = 'MyLibrary'
                 version = 'v0.9'
