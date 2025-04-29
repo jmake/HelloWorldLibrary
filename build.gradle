@@ -12,7 +12,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    namespace 'com.hello.world'
+    namespace 'com.example.helloworld'
     compileSdkVersion 34
 
     defaultConfig {
@@ -24,9 +24,7 @@ android {
 publishing {
     publications {
         release(MavenPublication) {
-            afterEvaluate {
-                from components.android.release
-            }
+            from components["android"]  // Correct reference for the Android library component
             groupId = 'com.github.jmake'
             artifactId = 'HelloWorldLibrary'
             version = 'v0.1'
@@ -37,58 +35,3 @@ publishing {
 dependencies {
     // No dependencies
 }
-
-/*
-buildscript {
-    repositories {
-        jcenter()
-        google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
-}
-*/
-/*
-plugins {
-    id 'com.android.library'
-}
-
-android {
-    namespace 'com.hello.world'
-    compileSdk 34
-
-    defaultConfig {
-        minSdk 21
-        targetSdk 34
-    }
-}
-
-dependencies {
-    // No dependencies
-}
-*/
-
-/*
-apply plugin: 'com.android.library'
-
-android {
-    compileSdkVersion 34
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 34 
-    }
-}
-
-dependencies {
-    // No dependencies for simplicity
-}
-*/
