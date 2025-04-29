@@ -1,3 +1,36 @@
+plugins {
+    id 'com.android.library' version '8.1.1'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.example.helloworld'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+    }
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
+                from components.release
+            }
+            groupId = 'com.github.jmake'
+            artifactId = 'HelloWorldLibrary'
+            version = 'v0.1'
+        }
+    }
+}
+
+dependencies {
+    // No dependencies
+}
+
+/*
 buildscript {
     repositories {
         jcenter()
@@ -15,7 +48,7 @@ allprojects {
         google()
     }
 }
-
+*/
 /*
 plugins {
     id 'com.android.library'
