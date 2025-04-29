@@ -1,15 +1,23 @@
-plugins {
-    id 'com.android.library' version '8.1.1'
-    id 'maven-publish'
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.1'
+    }
 }
 
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
 android {
-    namespace 'com.example.helloworld'
-    compileSdk 34
+    namespace 'com.hello.world'
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdk 21
-        targetSdk 34
+        minSdkVersion 21
+        targetSdkVersion 34
     }
 }
 
