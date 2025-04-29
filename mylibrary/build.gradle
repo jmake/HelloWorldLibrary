@@ -23,7 +23,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components["release"]
+                from components["default"]
                 groupId = 'com.github.jmake'
                 artifactId = 'MyLibrary'
                 version = 'v0.9'
