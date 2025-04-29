@@ -25,7 +25,7 @@ publishing {
     publications {
         release(MavenPublication) {
             afterEvaluate {
-                from components.release
+                from components.android.release
             }
             groupId = 'com.github.jmake'
             artifactId = 'HelloWorldLibrary'
