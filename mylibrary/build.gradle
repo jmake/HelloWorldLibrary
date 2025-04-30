@@ -1,33 +1,74 @@
 plugins {
+    // SEE: .\gradle\libs.versions.toml 
+//    id("com.android.library") //version "8.9.1" 
+    //alias(libs.plugins.android.library) 
+
+//    id("maven-publish") // publishing 
+
+// > Task :mylibrary:compileDebugKotlin FAILED
+//    id("org.jetbrains.kotlin.android")
+
     id 'com.android.library'
     id 'maven-publish'
 }
 
 android {
-    namespace 'com.example.mylibrary'
-    compileSdk 33
+    namespace 'com.spicy.mylibrary1'
+    compileSdk 35
 
     defaultConfig {
-        minSdk 21
-        targetSdk 33
+//        applicationId NO USED IN LIBRARIES!
+        minSdk 24
+
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
+
+// .\mylibrary\src\main\java\com\spicy\mylibrary1
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components["default"]
-                groupId = 'com.github.jmake'
-                artifactId = 'MyLibrary'
-                version = 'v0.9'
+                println("[$project.name] " + "Components: " + components*.name)
+                println("[$project.name] " + " '$buildDir/outputs/aar/${project.name}-release.aar' ")
+
+//                from components.release // fails!!
+
+                groupId = 'com.spicy'
+                artifactId = project.name
+                version = '1.0.0'
+
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
             }
+        }
+/*
+        repositories {
+            maven {
+                url = uri("$buildDir/repo")
+            }
+*/            
         }
     }
 }
