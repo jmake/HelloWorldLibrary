@@ -3,7 +3,7 @@ name: Build and Publish Library
 on:
   workflow_dispatch : 
 
-  #push:
+  push:
 
 jobs:
   build:
@@ -45,9 +45,4 @@ jobs:
       - name: Publish to custom directory
         run: ./gradlew publish
 
-      # Upload build artifacts (AAR file) as a GitHub Actions artifact
-      - name: Upload AAR as build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mylibrary-release-aar
-          path: build/outputs/aar/*.aar
+
