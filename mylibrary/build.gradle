@@ -54,13 +54,13 @@ afterEvaluate {
                 println("[$project.name] " + "Components: " + components*.name)
                 println("[$project.name] " + " '$buildDir/outputs/aar/${project.name}-release.aar' ")
 
-//                from components.release // fails!!
+                from components.release // fails!!
 
                 groupId = 'com.spicy'
                 artifactId = project.name
                 version = '1.0.0'
 
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+//                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
             }
         }
 /*
